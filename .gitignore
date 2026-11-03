@@ -1,0 +1,36 @@
+# Build directories
+build/
+out/
+cmake-build-*/
+
+# IDE
+.vs/
+.vscode/
+*.suo
+*.user
+*.sln
+*.vcxproj*
+.idea/
+
+# Compiled
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dll
+*.dylib
+*.exe
+
+# OS
+Thumbs.db
+.DS_Store
+
+# ONNX models (large)
+*.onnx
+*.onnx.data
+
+# Editor backups
+*~
+*.swp
+*.swo

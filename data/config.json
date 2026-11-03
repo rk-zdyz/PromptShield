@@ -1,0 +1,67 @@
+{
+  "promptshield": {
+    "version": "1.0.0",
+
+    "layers": {
+      "unicode_norm": {
+        "enabled": true,
+        "mixed_script_detection": true,
+        "fullwidth_normalization": true
+      },
+      "aho_corasick": {
+        "enabled": true,
+        "case_insensitive": true,
+        "patterns_file": "data/patterns.json",
+        "min_matches_suspicious": 1,
+        "min_matches_malicious": 2
+      },
+      "statistical": {
+        "enabled": true,
+        "entropy_high_threshold": 4.5,
+        "entropy_low_threshold": 2.0,
+        "instruction_density_suspicious": 0.15,
+        "instruction_density_malicious": 0.30,
+        "min_text_length": 10
+      },
+      "canary": {
+        "enabled": true,
+        "canary_prefix": "ps-canary-",
+        "canary_length": 16
+      },
+      "context_tracker": {
+        "enabled": true,
+        "window_size": 16
+      },
+      "ml_classifier": {
+        "enabled": true,
+        "model_path": "data/model/model.onnx",
+        "vocab_path": "data/model/vocab.txt",
+        "threshold_suspicious": 0.7,
+        "threshold_malicious": 0.9,
+        "max_sequence_length": 512
+      }
+    },
+
+    "pipeline": {
+      "early_exit_confidence": 0.95,
+      "weights": {
+        "aho_corasick": 0.30,
+        "statistical": 0.20,
+        "ml_classifier": 0.30,
+        "canary": 0.10,
+        "context_tracker": 0.10
+      }
+    },
+
+    "server": {
+      "host": "127.0.0.1",
+      "port": 8720,
+      "num_threads": 4,
+      "request_timeout_ms": 5000,
+      "cors_origin": "*",
+      "enable_dashboard": true,
+      "tls_cert": "",
+      "tls_key": ""
+    }
+  }
+}
